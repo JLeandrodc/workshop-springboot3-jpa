@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -26,6 +27,7 @@ public class User implements Serializable { //transforma o objeto em uma cadeia 
 	private String phone;
 	private String password;
 	
+	@JsonIgnore//Por estar sendo referenciado em outra tabela, gera um loop, o #JsonIgnore para o loop
 	@OneToMany (mappedBy = "client")//Ja esxiste essa chave na classe Order, com a variavel nome "client"
 	private List<Order> orders = new ArrayList<>(); // Associação com a entidade "Order"
 	
